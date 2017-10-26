@@ -1,0 +1,14 @@
+let Img = <%-JSON.stringify(Img)%>;
+
+for (let i in Img) {
+	if (Array.isArray(Img[i])) {
+		for (let j = 0; j < Img[i].length; j++) {
+			Img[i][j] = new Image();
+			Img[i][j].src = `/img/${i}/${j}.png`;
+		}
+	}
+	else {
+		Img[i] = new Image();
+		Img[i].src = `/img/${i}.png`;
+	}
+}

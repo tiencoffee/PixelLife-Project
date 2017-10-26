@@ -1,0 +1,8 @@
+socket.emit()                          - chỉ gửi đến người gửi.
+io.emit()                              - gửi đến tất cả mọi người, gồm người gửi.
+socket.broadcast.emit()                - gửi đến tất cả mọi người, trừ người gửi.
+socket.broadcast.to("room").emit()     - gửi đến tất cả mọi người trong phòng "room", trừ người gửi.
+io.in("room").emit()                   - gửi đến tất cả mọi người trong phòng "room", gồm người gửi.
+socket.to("room").emit()               - 
+io.of("namespace").emit()              - gửi đến tất cả mọi người trong không gian tên "namespace", gồm người gửi.
+socket.broadcast.to(socketid).emit()   - gửi đến socketid cá nhân.

@@ -1,0 +1,12 @@
+<div id="divLogin" class="w3-fixed w3-flex-evenly w3-flex">
+	<h1 class="w3-jumbo w3-text-pink">Pixel Life</h1>
+	<form id="frmLogin" class="w3-center" style="width:320px">
+		<input type="text" name="name" class="w3-input w3-center w3-border" placeholder="Tên nhân vật" pattern="[a-z0-9]+" minlength="6" maxlength="12" required>
+		<input type="password" name="pass" class="w3-input w3-center w3-border w3-margin-top" placeholder="Mật khẩu" minlength="6" maxlength="48" required>
+		<input type="submit" class="w3-button w3-pink w3-margin-top" value="Đăng nhập">
+	</form>
+	<button class="w3-button btnToggle">Đăng ký</button>
+	<footer class="w3-block w3-container w3-small">
+		<p class="w3-left w3-bottom">&copy; 2017<% if(new Date().getFullYear() > 2017) { %><%- " - " + new Date().getFullYear() %><% } %> Pixel Life. Powered by <a href="https://heroku.com" target="blank">Heroku</a></p>
+	</footer>
+</div>

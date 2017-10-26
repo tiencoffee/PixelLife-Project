@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+	<meta charset="utf-8">
+	<title>World map</title>
+
+	<script src="/lib/jquery.min.js"></script>
+	<script src="/lib/jsplus.js"></script>
+
+	<style>
+		body {
+			font: 14px calibri;
+		}
+		.cvs {
+			position: fixed;
+			left: 0;
+			top: 0;
+			zoom: 5;
+			image-rendering: pixelated;
+		}
+		#tooltip {
+			position: fixed;
+			border: solid 2px #444;
+			border-radius: 8px;
+			padding: 6px 8px 2px;
+			display: inline-block;
+			background: #eee;
+			color: #444;
+			z-index: 10;
+		}
+		#tooltip> .flag {
+			width: 7px;
+			height: 7px;
+			max-width: 7px;
+			zoom: 8;
+			image-rendering: pixelated;
+		}
+		#tooltip .country,
+		#tooltip .capital {
+			width: 56px;
+			word-wrap: break-word;
+		}
+		#tooltip .country {
+			margin-top: 1px;
+			font-size: 13px;
+		}
+		#tooltip .capital {
+			font-size: 12px;
+			font-style: italic;
+			color: #888;
+		}
+	</style>
+
+	<script>
+		$(function() {
+			const _ = undefined;
+
+			let layers, img = {}, g = {}, data = {}, map = [], imgCount = 0, W, H;
+
+			<% include ../../models/object/OCountry.js %>
+
+			layers = ["country", "capital"];
+
+			for (let v of layers) {
+				let cvs = document.createElement("canvas");
+
+				document.body.append(cvs);
+				cvs.className = "cvs";
+
+				g[v] = cvs.getContext("2d");
+				g[v].imageSmoothingEnabled = false;
+
+				img[v] = new Image;
+				img[v].src = "../../img/" + v + ".png";
+				img[v].onload = function() {
+					imgCount++;
+
+					if (!(W || H)) {
+						W = this.naturalWidth;
+						H = this.naturalHeight;
+					}
+
+					cvs.width = W;
+					cvs.height = H;
+
+					if (imgCount === layers.length) {
+						start();
+					}
+				};
+			}
+
+			function start() {
+				for (let v of layers) {
+					g[v].clearRect(0, 0, W, H);
+					g[v].drawImage(img[v], 0, 0);
+
+					data[v] = g[v].getImageData(0, 0, W, H).data;
+				}
+
+				for (let i = 0; i < data.country.length; i += 4) {
+					let id = OCountry.findIndex(v =>
+						v[2] === (data.country[i] << 16) + (data.country[i + 1] << 8) + data.country[i + 2]
+					);
+
+					map.push(id);
+				}
+
+				console.log(JSON.stringify(map).replace(/-1/g, "_"));
+
+				$(document)
+					.mousemove(event => {
+						let mx = Math.floor(event.clientX / 5),
+							my = Math.floor(event.clientY / 5);
+
+						if (mx >= 0 && mx < W && my >= 0 && my < H) {
+							let country = OCountry[map[my * W + mx % W]];
+
+							if (country) {
+								$(tooltip)
+									.css("transform", `translate(${event.clientX + 4}px, ${event.clientY - 24}px)`)
+									.html(`
+										<div class="flag" style="background: url(/img/flag.png) -${map[my * W + mx % W] * 8}px 0/auto no-repeat"></div>
+										<div class="country">${country[0]}</div>
+									`)
+									.show();
+
+								if (mx === country[3] && my === country[4]) {
+									$(tooltip).append(`
+										<div class="capital">${country[1]}</div>
+									`);
+								}
+							}
+							else {
+								$(tooltip)
+									.empty()
+									.hide();
+							}
+						}
+					});
+			}
+		});
+	</script>
+</head>
+<body>
+	<div id="tooltip"></div>
+</body>
+</html>

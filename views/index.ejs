@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+	<meta charset="utf-8">
+	<title>Pixel Life</title>
+
+	<link rel="stylesheet" href="/lib/w3.css">
+	<link rel="stylesheet" href="/lib/w3ext.css">
+	<link rel="stylesheet" href="/style.css">
+
+	<script src="https://www.google.com/recaptcha/api.js"></script>
+	<script src="/lib/jquery.min.js"></script>
+	<script src="/lib/socket.io.js"></script>
+	<script src="/lib/velocity.min.js"></script>
+	<script src="/lib/velocity.ui.min.js"></script>
+	<script src="/lib/jsplus.js"></script>
+	<script>
+		$(function() {
+			"use strict";
+
+			<%include ../scripts/both/declrGlobal.js%>
+			<%include ../scripts/client/declr.js%>
+			<%include ../scripts/both/funcGlobal.js%>
+			<%include ../scripts/client/func.js%>
+
+			<%include ../models/object/OCountry.js%>
+			<%include ../models/object/OArea.js%>
+
+			<%include ../scripts/client/img.ejs%>
+
+			<%-codeModels%>
+
+			<%include ../models/object/OModels.js%>
+
+			let Log = [,<% include ../scripts/client/log.js%>];
+			let Task = {<% include ../scripts/client/task.js%>};
+
+			<%include ../scripts/client/init.js%>
+			<%include ../scripts/client/event.js%>
+			socket<%include ../scripts/client/socket.js%>;
+
+			function animate() {
+				<%include ../scripts/client/logic.js%>
+				<%include ../scripts/client/paint.js%>
+				start();
+			}
+		});
+	</script>
+</head>
+<body class="w3-light-gray">
+	<%include login.ejs%>
+	<%include main.ejs%>
+</body>
+</html>

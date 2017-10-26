@@ -1,0 +1,135 @@
+.w3-flex{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.w3-flex-evenly{
+	justify-content: space-evenly;
+}
+.w3-fixed{
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+.w3-grid {
+	overflow: hidden!important;
+	display: flex!important;
+	flex-wrap: wrap;
+	justify-content: flex-start
+}
+.w3-grid-item {
+	margin: 1px -1px -1px 1px!important;
+	border-bottom: solid 1px #ccc;
+	border-right: solid 1px #ccc;
+	float: left
+}
+.g1> .w3-grid-item {
+	width: 100%!important
+}
+.g2> .w3-grid-item {
+	width: 50%!important
+}
+.g3> .w3-grid-item {
+	width: 33.33333%!important
+}
+.g4> .w3-grid-item {
+	width: 25%!important
+}
+.g5> .w3-grid-item {
+	width: 20%!important
+}
+.g6> .w3-grid-item {
+	width: 16.66666%!important
+}
+.g7> .w3-grid-item {
+	width: 14.28571%!important
+}
+.g8> .w3-grid-item {
+	width: 12.5%!important
+}
+.g9> .w3-grid-item {
+	width: 11.11111%!important
+}
+.g10> .w3-grid-item {
+	width: 10%!important
+}
+.g11> .w3-grid-item {
+	width: 9.09090%!important
+}
+.g12> .w3-grid-item {
+	width: 8.33333%!important
+}.w3-overflow-hidden {
+	overflow: hidden;
+}
+.w3-overflow-auto {
+	overflow: auto;
+}
+.w3-uppercase {
+	text-transform: uppercase
+}
+.w3-lowercase {
+	text-transform: lowercase
+}
+.w3-bold {
+	font-weight: bold
+}
+.w3-noevent {
+	pointer-events: none!important
+}
+.w3-hide-empty:empty {
+	display: none!important
+}
+.w3-monospace {
+	font-family: monospace
+}
+.w3-ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap
+}
+.w3-nowrap {
+	white-space: nowrap
+}
+.w3-switch {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: none;
+}
+.w3-switch:before {
+	content: "";
+	width: 60px;
+	height: 29px;
+	margin: 4px 0px -2px 0px;
+	border-radius: 100px;
+	display: inline-block;
+	background: #ccc;
+	transition: 0.2s;
+}
+.w3-switch:after {
+	content: "";
+	width: 23px;
+	height: 23px;
+	margin-left: -56px;
+	margin-bottom: 1px;
+	border-radius: 50%;
+	display: inline-block;
+	background: #eee;
+	transition: 0.2s;
+}
+.w3-switch:checked:after {
+	margin-left: -27px;
+}
+.w3-switch:checked:before {
+	background: #2196f3;
+}
+.w3-active, .w3-active:hover {
+	background-color: #87ceeb!important;
+	color: #000!important;
+	pointer-events: none;
+	box-shadow: 0 0 0 2px #03a9f4 inset;
+	transition: 0.2s;
+}
